@@ -17,8 +17,9 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+
     @PostMapping("/sign-in-with-admin")
-    public ResponseEntity<Object> signIn (@RequestBody SignInDTO signInDTO) throws Exception {
+    public ResponseEntity<Object> signInWithAdmin (@RequestBody SignInDTO signInDTO) throws Exception {
         try {
             String username = signInDTO.getUsername();
             String password = signInDTO.getPassword();
@@ -27,6 +28,18 @@ public class AuthController {
             throw new Exception(e);
         }
     }
+
+    @PostMapping("/sign-in-with-student")
+    public ResponseEntity<Object> signInWithStudent (@RequestBody SignInDTO signInDTO) throws Exception {
+        try {
+            String username = signInDTO.getUsername();
+            String password = signInDTO.getPassword();
+            return authService.signInWithStudent(username, password);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
     @PostMapping("/authentication-token")
     public ResponseEntity<?> authenticationToken (@RequestHeader("accessToken") String accessToken) throws ParseException, JOSEException {
         return authService.authenticationToken(accessToken);
