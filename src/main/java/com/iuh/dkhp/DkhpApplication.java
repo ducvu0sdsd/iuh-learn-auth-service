@@ -9,5 +9,4 @@ public class DkhpApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DkhpApplication.class, args);
 	}
-
 }
